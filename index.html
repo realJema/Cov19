@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="table-responsive">
+            <h1>ABOUT CORONAVIRUS IN THE WORLD</h1>
+            <br>
+            <table class="table" id="case">
+                
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function funcorona() {
+        $.ajax({
+            type:"GET",
+            dataType: "json",
+            url: "https://corona.lmao.ninja/countries",
+            success: function(data){
+                var corona_cases = [];
+                $.each(data, function(key, value){
+                    corona_cases += '<tr>';
+                    corona_cases += '<td>'+value.country+'<td>';
+                    corona_cases += '<td>'+value.cases+'<td>';
+                    corona_cases += '<td>'+value.todayCases+'<td>';
+                    corona_cases += '<td>'+value.deaths+'<td>';
+                    corona_cases += '<td>'+value.todayDeaths+'<td>';
+                    corona_cases += '<td>'+value.recovered+'<td>';
+                    corona_cases += '<td>'+value.critical+'<td>';
+                    corona_cases += '</tr>';
+                });
+                
+                $('#case').html(corona_cases);
+            }
+        });
+        return false;
+    }
+    funcorona();
+    var interval = setInterval(funcorona, 5000);
+</script>
