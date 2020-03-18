@@ -1,84 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto|Roboto+Mono&display=swap" rel="stylesheet">
+    <title>COVID-19 TRACKER</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
+    <link rel='stylesheet' href='css/bootstrap.min.css'>
     
 </head>
 <body>
-    <div class="container">
-        <div class="table-responsive">
-            <h1>ABOUT CORONAVIRUS IN CAMEROON</h1>
-            <br>
-            <table class="table" id="case">
-                
-            </table>
+    <div class="wrapper">
+        <div class="statistic">
+
+            <div class="total_case_box">
+                <h2>Total Cases</h2>
+                <p id="total_cases"></p>
+            </div>
+           <div class="box_wrapper">
+                <div class="box">
+                    <h2>Total Death</h2>
+                    <p id="total_death"> </p>
+                </div>
+
+                <div class="box">
+                    <h2>Total Recovery</h2>
+                    <p id="total_recovered"> </p>
+                </div>
+
+                <div class="box">
+                    <h2>New case</h2>
+                    <p id="new_case"> </p>
+                </div>
+
+                <div class="box">
+                    <h2>New Death</h2>
+                    <p id="new_death"> </p>
+                </div>
+           </div> 
+        
+           <table id="countries_stat">
+               <tr>
+                   <th>Country</th>
+                   <th>Cases</th>
+                   <th>Deaths</th>
+                   <th>serious critical</th>
+                   <th>total recovered</th>
+               </tr>
+           </table>
         </div>
     </div>
+
+    <script src='js/script.js'></script>
 </body>
 </html>
-
-<script>
-    function get_updates_corona() {
-        console.log('fetching')
-        $.ajax({
-            type:"GET",
-            dataType: "json",
-            url: "https://corona.lmao.ninja/countries",
-            success: function(data){
-                var corona_cases = [];
-                // table heads 
-                        corona_cases += '<thead>';
-                        corona_cases += '<tr>';
-                        corona_cases += '<td><b> Country </b></td>';
-                        corona_cases += '<td><b> Cases </b></td>';
-                        corona_cases += '<td><b> Cases Today </b></td>';
-                        corona_cases += '<td><b> Deaths </b></td>';
-                        corona_cases += '<td><b> Today Deaths </b></td>';
-                        corona_cases += '<td><b> Recovered </b></td>';
-                        corona_cases += '<td><b> Critical </b></td>';
-                        corona_cases += '</tr>';
-                        corona_cases += '</thead>';
-                // this returns the values for cameroon
-                $.each(data, function(key, value){
-                    var current_dict = value;
-                    if(current_dict.country == 'Cameroon'){
-                        corona_cases += '<tr>';
-                        corona_cases += '<td>'+value.country+'</td>';
-                        corona_cases += '<td>'+value.cases+'</td>';
-                        corona_cases += '<td>'+value.todayCases+'</td>';
-                        corona_cases += '<td>'+value.deaths+'</td>';
-                        corona_cases += '<td>'+value.todayDeaths+'</td>';
-                        corona_cases += '<td>'+value.recovered+'</td>';
-                        corona_cases += '<td>'+value.critical+'</td>';
-                        corona_cases += '</tr>';
-                        return false;
-                    }
-                });
-
-                $.each(data, function(key, value){
-                    corona_cases += '<tr>';
-                    corona_cases += '<td>'+value.country+'</td>';
-                    corona_cases += '<td>'+value.cases+'</td>';
-                    corona_cases += '<td>'+value.todayCases+'</td>';
-                    corona_cases += '<td>'+value.deaths+'</td>';
-                    corona_cases += '<td>'+value.todayDeaths+'</td>';
-                    corona_cases += '<td>'+value.recovered+'</td>';
-                    corona_cases += '<td>'+value.critical+'</td>';
-                    corona_cases += '</tr>';
-                });
-                
-                $('#case').html(corona_cases);
-            }
-        });
-        console.log('end of fetch')
-        return false;
-    }
-    get_updates_corona();
-    var interval = setInterval(get_updates_corona, 500000);
-</script>
