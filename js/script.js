@@ -74,8 +74,8 @@ fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.p
 // code for map 
 
 var map = L.map('map', {
-    center: [7.3, 12.3],
-    zoom: 6
+    center: [5.3, 13.3],
+    zoom: 6.2
 });
 
 var defaultLayer = L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
