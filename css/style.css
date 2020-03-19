@@ -55,7 +55,10 @@
     border-image: initial;
     border-color: rgb(225, 226, 227);
 }
-
+.main {
+    padding: 0 !important;
+    margin: 0 !important;
+}
 .country_stats {
     width: 100%;
 }
@@ -87,6 +90,41 @@ html, body {
     box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
     overflow: scroll;
     background-color: #fff;
-    padding: 2rem !important;
+    /* padding: 2rem !important; */
     height: 1000px;
+}
+
+.map {
+    height: 100vh;
+}
+
+.legend {
+    
+  padding: 6px 8px;
+  font: 14px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  /*border-radius: 5px;*/
+  line-height: 24px;
+  color: #555;
+}
+
+.communication {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    margin: 2%;
+    height: 50%;
+    overflow-y: scroll;
+    width: 25%;
+}
+
+.title {
+    font-size:  2rem;
+    line-height: 1.125;
+    font-weight: 700;
+    font-family: FiraGO,'IBM Plex Sans',system-ui,sans-serif;
+    margin-bottom: 1.25rem;
 }

@@ -15,15 +15,15 @@
         <div class="row main">
             <div class="col-3 list_countries">
                 <div>
-                    <h3>Tracking Coronavirus
-                        COVID-19</h3>
+                    <h2 class="title">Tracking Cameroon
+                        COVID-19</h2>
                         <p>
                         The first case of the new Coronavirus COVID-19 was recorded on 31 December in Wuhan, China (WHO). Since then, 197,145 confirmed cases have been recorded worldwide. This visualization shows the near real-time status based on data from the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University and DXY. Data currently available on the following zoom levels: City level - US, Canada and Australia; Province level - China; Country level - other countries. Learn how this map was created.</p><br/>
                 </div>
                 <div class="global_stat row">
                     <div class="col-4 box">
                         <h5 class="figures" id="total_death"></h5>
-                        <p class="subtitle" >Death</p>
+                        <p class="subtitle" >Deaths</p>
                     </div>
                     <div class="col-4 box">
                         <h5 class="figures" id="total_recovered"></h5>
@@ -38,8 +38,20 @@
                 <div class="row" id="country_stats"></div>
             </div>
                 <!-- The map goes here -->
-                <div id="map" class="map col-9"></div>
+            <div id="map" class="map col-9"></div>
                 <!-- end of the map -->
+
+            <!-- tweets du ministre -->
+            <div class="communication">
+                <!-- lien vers le twitter feed du Dr Manaouda -> Ministre de la Sante au Cameroun -->
+                <h6>Ministre de la Sante</h6>
+                <div class="tweet_feed">
+                    <a class="twitter-timeline"  href="https://twitter.com/DrManaouda?ref_src=twsrc%5Etfw">Ministre de la Sante
+                        <b>Dr. Manaouda Malachie</b>
+                    </a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
         </div>
         <script src="http://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

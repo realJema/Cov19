@@ -74,8 +74,8 @@ fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.p
 // code for map 
 
 var map = L.map('map', {
-    center: [5.3, 13.3],
-    zoom: 6.2
+    center: [6.3, 13.3],
+    zoom: 6
 });
 
 var defaultLayer = L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
@@ -129,4 +129,25 @@ var overlayLayers = {
 L.control.layers(baseLayers, overlayLayers, {collapsed: true}).addTo(map);
 
 
+/*Legend specific*/
+var legend = L.control({ position: "bottomleft" });
 
+legend.onAdd = function(map) {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<p>Created by <b>NATIVE</b></p>";
+  
+  
+
+  return div;
+};
+
+legend.addTo(map);
+
+
+// adding markers for identified cases 
+yde = L.marker([3.8480, 11.5021]);
+yde.bindPopup("13 Cases Identifier ici");
+yde.on('mouseover',function(ev) {
+    yde.openPopup();
+  });
+yde.addTo(map);
