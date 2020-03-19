@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "trial3",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "my_polys": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 10.352760904793733, 4.109132395351205 ], [ 12.729095834858002, 5.490924274636457 ], [ 14.850611807334333, 3.085964493878893 ], [ 11.23573822294729, 2.571030400589918 ], [ 11.44907502464882, 2.878834752385822 ], [ 10.352760904793733, 4.109132395351205 ] ] ] ] } }
+]
+}

@@ -15,11 +15,12 @@ fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php", {
         "x-rapidapi-key": "53009286a0mshdc8ec356f7aa205p1e0e80jsn5858f548ed53"
     }
 })
+
 .then(response => response.json().then( data => {
-    console.log(data);
+    // console.log(data);
     total_cases.innerHTML = data.total_cases;
-    new_cases.innerHTML = data.new_cases;
-    new_death.innerHTML = data.new_deaths;
+    // new_cases.innerHTML = data.new_cases;
+    // new_death.innerHTML = data.new_deaths;
     total_death.innerHTML = data.total_deaths;
     total_recovered.innerHTML = data.total_recovered;
 
@@ -28,20 +29,6 @@ fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php", {
 });
 
 
-// getting data for cameroon only 
-fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_particular_country.php?country=cameroon", {
-    "method": "GET",
-    "headers": {
-        "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-        "x-rapidapi-key": "ccfd6d0737mshd6c7a1cb1240d08p15ff91jsna44168a93e9d"
-    }
-})
-.then(response => {
-    console.log(response);
-})
-.catch(err => {
-    console.log(err);
-});
 //Fetching The Case by Country Data
 fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php", {
     "method": "GET",
@@ -51,26 +38,95 @@ fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.p
     }
 })
 .then(response => response.json().then(data =>{
-    console.log(data)
+    // console.log(data)
     let countries_stat = data.countries_stat;
+    let list_country = document.getElementById("country_stats");
 //Getting all the country statistic using a loop
     for(let i = 0; i<countries_stat.length;i++){
-        console.log(countries_stat[i]);
-        //we will start by inserting the new rows inside our table
-        let row = table.insertRow(i+1);
-        let country_name = row.insertCell(0);
-        let cases = row.insertCell(1);
-        let deaths = row.insertCell(2);
-        let serious_critical = row.insertCell(3);
-        let recovered_per_country = row.insertCell(4);
-        country_name.innerHTML = countries_stat[i].country_name;
-        cases.innerHTML = countries_stat[i].cases;
-        deaths.innerHTML = countries_stat[i].deaths;
-        serious_critical.innerHTML = countries_stat[i].serious_critical;
-        recovered_per_country.innerHTML = countries_stat[i].total_recovered;
+        // console.log(countries_stat[i]);
+
+        var content = '<div class="country_stat col-12">';
+        content += '<div class="col-6">';
+        content += '<h3 class="country_name">' + countries_stat[i].country_name + '</h3>';
+        content += '</div>';
+        content += '<div class="col-6 info">';
+        content += '<p> Confirmed </p>';
+        content += '<p>' + countries_stat[i].cases + '</p>';
+        content += '</div">';
+        content += '</div>';
+
+        if(countries_stat[i].country_name == 'Cameroon'){
+            //prepend text
+            old_content = list_country.innerHTML
+            list_country.innerHTML = content;
+            list_country.innerHTML += old_content;
+        } else {
+            list_country.innerHTML += content; 
+        }
 
     }
 }))
 .catch(err => {
     console.log(err);
 });
+
+
+// code for map 
+
+var map = L.map('map', {
+    center: [7.3, 12.3],
+    zoom: 6
+});
+
+var defaultLayer = L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
+
+// base layers
+var baseLayers = {
+    'OpenStreetMap Default': defaultLayer,
+    'OpenStreetMap German Style': L.tileLayer.provider('OpenStreetMap.DE'),
+    'OpenStreetMap Black and White': L.tileLayer.provider('OpenStreetMap.BlackAndWhite'),
+    'OpenStreetMap H.O.T.': L.tileLayer.provider('OpenStreetMap.HOT'),
+    'Thunderforest OpenCycleMap': L.tileLayer.provider('Thunderforest.OpenCycleMap'),
+    'Thunderforest Transport': L.tileLayer.provider('Thunderforest.Transport'),
+    'Thunderforest Landscape': L.tileLayer.provider('Thunderforest.Landscape'),
+    'Hydda Full': L.tileLayer.provider('Hydda.Full'),
+    'Stamen Toner': L.tileLayer.provider('Stamen.Toner'),
+    'Stamen Terrain': L.tileLayer.provider('Stamen.Terrain'),
+    'Stamen Watercolor': L.tileLayer.provider('Stamen.Watercolor'),
+    'Esri WorldStreetMap': L.tileLayer.provider('Esri.WorldStreetMap'),
+    'Esri DeLorme': L.tileLayer.provider('Esri.DeLorme'),
+    'Esri WorldTopoMap': L.tileLayer.provider('Esri.WorldTopoMap'),
+    'Esri WorldImagery': L.tileLayer.provider('Esri.WorldImagery'),
+    'Esri WorldTerrain': L.tileLayer.provider('Esri.WorldTerrain'),
+    'Esri WorldShadedRelief': L.tileLayer.provider('Esri.WorldShadedRelief'),
+    'Esri WorldPhysical': L.tileLayer.provider('Esri.WorldPhysical'),
+    'Esri OceanBasemap': L.tileLayer.provider('Esri.OceanBasemap'),
+    'Esri NatGeoWorldMap': L.tileLayer.provider('Esri.NatGeoWorldMap'),
+    'Esri WorldGrayCanvas': L.tileLayer.provider('Esri.WorldGrayCanvas'),
+    'Geoportail France Maps': L.tileLayer.provider('GeoportailFrance'),
+    'Geoportail France Orthos': L.tileLayer.provider('GeoportailFrance.orthos'),
+    'Geoportail France classic maps': L.tileLayer.provider('GeoportailFrance.ignMaps')
+};
+
+// overlays
+var overlayLayers = {
+    'OpenSeaMap': L.tileLayer.provider('OpenSeaMap'),
+    'OpenWeatherMap Clouds': L.tileLayer.provider('OpenWeatherMap.Clouds'),
+    'OpenWeatherMap CloudsClassic': L.tileLayer.provider('OpenWeatherMap.CloudsClassic'),
+    'OpenWeatherMap Precipitation': L.tileLayer.provider('OpenWeatherMap.Precipitation'),
+    'OpenWeatherMap PrecipitationClassic': L.tileLayer.provider('OpenWeatherMap.PrecipitationClassic'),
+    'OpenWeatherMap Rain': L.tileLayer.provider('OpenWeatherMap.Rain'),
+    'OpenWeatherMap RainClassic': L.tileLayer.provider('OpenWeatherMap.RainClassic'),
+    'OpenWeatherMap Pressure': L.tileLayer.provider('OpenWeatherMap.Pressure'),
+    'OpenWeatherMap PressureContour': L.tileLayer.provider('OpenWeatherMap.PressureContour'),
+    'OpenWeatherMap Wind': L.tileLayer.provider('OpenWeatherMap.Wind'),
+    'OpenWeatherMap Temperature': L.tileLayer.provider('OpenWeatherMap.Temperature'),
+    'OpenWeatherMap Snow': L.tileLayer.provider('OpenWeatherMap.Snow'),
+    'Geoportail France Parcels': L.tileLayer.provider('GeoportailFrance.parcels')
+};
+
+// adding baselayers and overlays to map
+L.control.layers(baseLayers, overlayLayers, {collapsed: true}).addTo(map);
+
+
+

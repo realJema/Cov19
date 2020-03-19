@@ -1,85 +1,92 @@
-*{
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    font-family: 'Nunito',sans-serif;
-}
-body{
-    background-color: #1e88e5;
-}
-.wrapper{
-    width: 80%;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.statistic{
-    width: 100%;
+.box {
+        display: flex;
+        cursor: pointer;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: start;
+        justify-content: flex-start;
+        font-size: 1rem;
+        margin-bottom: -2px;
+        height: 100%;
+        width: 33.3333%;
+        color: rgb(106, 109, 116);
+        outline: none;
+        transition: all 0.2s ease 0s;
+        padding: 0.5rem 1rem 0.5rem 1.25rem;
+        border-bottom: 2px solid transparent;
+        border-color: transparent;
+        display: block;
+        margin: 0;
 }
 
-.total_case_box{
-    
-    background-color: #fafafa;
-    box-shadow: 2px 2px 8px rgba(30,30,30,.2);
-    margin: 10px 15px;
-    padding: 15px 0;
-    text-align: center;
-    text-transform: uppercase;
-}
-.total_case_box p{
-    font-size: 3rem;
-}
-.wrapper .box_wrapper{
+.global_stat {
     display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
+    border-bottom: 2px solid;
+    border-color: gainsboro;
 }
 
-.box_wrapper .box{
-    background-color: #fafafa;
-    box-shadow: 2px 2px 8px rgba(30,30,30,.2);
-    margin: 10px 15px;
-    width:25%;
-    text-align: center;
-    padding: 15px 0;
-    border-radius: 8px;
-    text-transform: uppercase;
+.figures {
+    font-size: 1.7rem;
 }
-.box_wrapper .box p{
-    font-size: 2.5rem;
+.country_name {
+    
+    font-family: FiraGO, "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    font-weight: 700;
+}
+.subtitle {
+    font-family: FiraGO, "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 1rem;
+    color: rgb(106, 109, 116);
 }
 
+.country_stat {
+    background-color: transparent;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border-width: 0.0625rem;
+    border-style: solid;
+    border-image: initial;
+    border-color: rgb(225, 226, 227);
+}
 
-/*Styiling the table*/
-table{
+.country_stats {
     width: 100%;
-    padding: 15px 10px;
-    margin: 10px 0;
-    text-align: center;
-    border-spacing: 0;
 }
-tr:first-child{
-    background-color: #37474f;
-    color: #fafafa;
-    text-transform: uppercase;
+
+p {
+    margin: 0 !important;
 }
-th{
-    padding: 15px 0;
-    border: none;
-    border-spacing: 0;
-    
+
+.col-6 {
+    float: left;
 }
-tr:nth-child(even){
-    background-color: #fafafa;
-    
-    
+
+.info {
+    text-align: right;
 }
-tr:nth-child(odd){
-    background-color: #424242;
-    color: #fafafa;
+
+html, body {
+    margin: 0; 
+    height: 100%; 
+    overflow: hidden;
 }
-tr td{
-    padding: 15px 0;
-    
-    
+.list_countries {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999999;
+    width: 100%;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    overflow: scroll;
+    background-color: #fff;
+    padding: 2rem !important;
+    height: 1000px;
 }
