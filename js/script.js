@@ -145,11 +145,26 @@ legend.addTo(map);
 
 // adding markers for identified cases 
 yde = L.marker([3.8480, 11.5021]);
-yde.bindPopup("13 Cases Identifier ici");
+yde.bindPopup("6 Cases Identifier ici");
 yde.on('mouseover',function(ev) {
     yde.openPopup();
   });
 yde.addTo(map);
+// adding markers for identified cases 
+baf = L.marker([5.4816, 10.4271]);
+baf.bindPopup("1 Cases Identifier ici");
+baf.on('mouseover',function(ev) {
+    baf.openPopup();
+  });
+  
+baf.addTo(map);
+// adding markers for identified cases 
+dla = L.marker([4.0511, 9.7679]);
+dla.bindPopup("9 Cases Identifier ici");
+dla.on('mouseover',function(ev) {
+    dla.openPopup();
+  });
+dla.addTo(map);
 
 
 // opening sidebar 
