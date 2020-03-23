@@ -137,9 +137,6 @@ var legend = L.control({ position: "bottomleft" });
 legend.onAdd = function(map) {
   var div = L.DomUtil.create("div", "legend");
   div.innerHTML += "<p>Created by <b>NATIVE</b></p>";
-  
-  
-
   return div;
 };
 
@@ -153,3 +150,9 @@ yde.on('mouseover',function(ev) {
     yde.openPopup();
   });
 yde.addTo(map);
+
+
+// opening sidebar 
+$( document ).ready(function() {
+    document.getElementById('openSidebar').click();
+});
