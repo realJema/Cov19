@@ -91,55 +91,7 @@
         <script src="js/leaflet.ajax.min.js"></script>
         <script src="js/leaflet-providers.js"></script>
         <script src="js/leaflet-sidebar.js"></script>
-        <!-- Add jQuery -->
-        <script src="js/leaflet-ajax/dist/leaflet.ajax.js"></script>
         <script src="js/script.js"></script>
-        <!-- end of scripts -->
-
-
         <script src="js/bootstrap.min.js"></script>
-        <script type="text/javascript">
-            function submitForm() {
-                console.log("submit event");
-                var fd = new FormData(document.getElementById("fileinfo"));
-                fd.append("title", document.getElementById("title_carte").value);
-                fd.append("descr", document.getElementById("descr_carte").value);
-                $.ajax({
-                    url: "js/upload.php",
-                    type: "POST",
-                    data: fd,
-                    processData: false, // tell jQuery not to process the data
-                    contentType: false // tell jQuery not to set contentType
-                }).done(function (data) {
-                    console.log("PHP Output: " + data);
-                    // reset form when done
-                    $("#fileinfo").trigger('reset');
-                    $('.modal').modal('hide');
-
-                    // reload maps list
-                    loadThematiques();
-                });
-                return false;
-            };
-
-
-            // load list of thematique maps
-            function loadThematiques() {
-                $.ajax({ // create an ajax request to js/display.php
-                    type: "GET",
-                    url: "js/loadThematiques.php",
-                    dataType: "html", // expect html to be returned
-                    success: function (response) {
-                        $("#thematiqueList").html(response);
-                        // alert(response);
-                    }
-                });
-            };
-
-            $(document).ready(function () {
-                loadThematiques();
-            });
-        </script>
-
     </body>
 </html>

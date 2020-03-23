@@ -61,7 +61,7 @@ fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.p
             list_country.innerHTML = content;
             list_country.innerHTML += old_content;
         } else {
-            // list_country.innerHTML += content; 
+            // list_country.innerHTML += content; // this prevents all the data of the countries from being loaded
         }
 
     }
