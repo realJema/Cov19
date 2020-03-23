@@ -61,7 +61,7 @@ fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.p
             list_country.innerHTML = content;
             list_country.innerHTML += old_content;
         } else {
-            list_country.innerHTML += content; 
+            // list_country.innerHTML += content; 
         }
 
     }
@@ -70,11 +70,8 @@ fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.p
     console.log(err);
 });
 
-
-// code for map 
-
 var map = L.map('map', {
-    center: [6.3, 13.3],
+    center: [7.3, 12.3],
     zoom: 6
 });
 
@@ -128,8 +125,13 @@ var overlayLayers = {
 // adding baselayers and overlays to map
 L.control.layers(baseLayers, overlayLayers, {collapsed: true}).addTo(map);
 
+// adding the sidebar to the map
+L.control.sidebar('sidebar').addTo(map);
+var legend = L.control({position: 'bottomright'});
 
-/*Legend specific*/
+// all the layers go into this layer group
+var layerGroup = L.layerGroup().addTo(map);
+
 var legend = L.control({ position: "bottomleft" });
 
 legend.onAdd = function(map) {

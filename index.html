@@ -1,71 +1,145 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset='utf-8'>
-        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto|Roboto+Mono&display=swap" rel="stylesheet">
-        <title>COVID-19 TRACKER</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
-        <link rel='stylesheet' href='css/bootstrap.min.css'>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        crossorigin=""/>
+<!-- Created by @NATIVE-Inc -->
 
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Carte Interactive</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta
+        http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- Leaflet style. REQUIRED! -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"/>
+        <link rel="stylesheet" href="css/leaflet-sidebar.css"/>
+        <!-- include css file -->
+
+        <!-- including bootstrap -->
+        <link
+        rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> <!-- end of boostrap -->
+
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
-        <div class="row main">
-            <div class="col-3 list_countries">
-                <div>
-                    <h2 class="title">Tracking Cameroon
-                        COVID-19</h2>
-                        <p>
-                        The first case of the new Coronavirus COVID-19 was recorded on 31 December in Wuhan, China (WHO). Since then, 197,145 confirmed cases have been recorded worldwide. This visualization shows the near real-time status based on data from the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University and DXY. Data currently available on the following zoom levels: City level - US, Canada and Australia; Province level - China; Country level - other countries. Learn how this map was created.</p><br/>
-                </div>
-                <div class="global_stat row">
-                    <div class="col-4 box">
-                        <h5 class="figures" id="total_death"></h5>
-                        <p class="subtitle" >Deaths</p>
-                    </div>
-                    <div class="col-4 box">
-                        <h5 class="figures" id="total_recovered"></h5>
-                        <p class="subtitle">Recovery</p>
-                    </div>
-    
-                    <div class="col-4 box">
-                        <h5 class="figures" id="total_cases"></h5>
-                        <p class="subtitle">Case</p>
-                    </div>
-                </div>
-                <div class="row" id="country_stats"></div>
-            </div>
-                <!-- The map goes here -->
-            <div id="map" class="map col-9"></div>
-                <!-- end of the map -->
+		
+        <div class="">
+			<!-- This is the sidebar  -->
 
-            <!-- tweets du ministre -->
-            <div class="communication">
-                <!-- lien vers le twitter feed du Dr Manaouda -> Ministre de la Sante au Cameroun -->
-                <h6>Ministre de la Sante</h6>
-                <div class="tweet_feed">
-                    <a class="twitter-timeline"  href="https://twitter.com/DrManaouda?ref_src=twsrc%5Etfw">Ministre de la Sante
-                        <b>Dr. Manaouda Malachie</b>
-                    </a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
-            </div>
-        </div>
-         <!-- Make sure you put this AFTER Leaflet's CSS -->
-        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin=""></script>
+			<div id="sidebar" class="sidebar collapsed">
+				<!-- Nav tabs -->
+				<div class="sidebar-tabs">
+					<ul role="tablist">
+						<li>
+							<a href="#home" role="tab">
+								<i class="fa fa-bars"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Tab panes -->
+				<div class="sidebar-content">
+					<div class="sidebar-pane" id="home">
+						<div>
+							<h2 class="title">Tracking Cameroon
+														COVID-19</h2>
+							<p>
+								The first case of the new Coronavirus COVID-19 was recorded on 31 December in Wuhan, China (WHO). Since then, 197,145 confirmed cases have been recorded worldwide. This visualization shows the near real-time status based on data from the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University and DXY. Data currently available on the following zoom levels: City level - US, Canada and Australia; Province level - China; Country level - other countries. Learn how this map was created.</p><br/>
+						</div>
+						<div class="global_stat row">
+							<div class="col-4 box">
+								<h5 class="figures" id="total_death"></h5>
+								<p class="subtitle">Deaths</p>
+							</div>
+							<div class="col-4 box">
+								<h5 class="figures" id="total_recovered"></h5>
+								<p class="subtitle">Recovery</p>
+							</div>
+
+							<div class="col-4 box">
+								<h5 class="figures" id="total_cases"></h5>
+								<p class="subtitle">Case</p>
+							</div>
+						</div>
+						<div class="row" id="country_stats"></div>
+					</div>
+
+				</div>
+			</div>
+			<!-- end of sidebar -->
+
+			<!-- The map goes here -->
+			<div id="map" class="map"></div>
+			<!-- end of the map -->
+
+			<!-- tweets du ministre -->
+			<div class="communication col-md-4 col-xs-6">
+				<!-- lien vers le twitter feed du Dr Manaouda -> Ministre de la Sante au Cameroun -->
+				<h6>Ministre de la Sante</h6>
+				<div class="tweet_feed">
+					<a class="twitter-timeline" href="https://twitter.com/DrManaouda?ref_src=twsrc%5Etfw">Ministre de la Sante
+						<b>Dr. Manaouda Malachie</b>
+					</a>
+					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+				</div>
+			</div>
+		</div>
+
+        <!-- The scripts go here -->
         <script src="http://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="js/leaflet.ajax.min.js"></script>
         <script src="js/leaflet-providers.js"></script>
+        <script src="js/leaflet-sidebar.js"></script>
         <!-- Add jQuery -->
-        <script src="js/bootstrap.min.js" ></script>
-        <script src='js/script.js'></script>
+        <script src="js/leaflet-ajax/dist/leaflet.ajax.js"></script>
+        <script src="js/script.js"></script>
+        <!-- end of scripts -->
+
+
+        <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            function submitForm() {
+                console.log("submit event");
+                var fd = new FormData(document.getElementById("fileinfo"));
+                fd.append("title", document.getElementById("title_carte").value);
+                fd.append("descr", document.getElementById("descr_carte").value);
+                $.ajax({
+                    url: "js/upload.php",
+                    type: "POST",
+                    data: fd,
+                    processData: false, // tell jQuery not to process the data
+                    contentType: false // tell jQuery not to set contentType
+                }).done(function (data) {
+                    console.log("PHP Output: " + data);
+                    // reset form when done
+                    $("#fileinfo").trigger('reset');
+                    $('.modal').modal('hide');
+
+                    // reload maps list
+                    loadThematiques();
+                });
+                return false;
+            };
+
+
+            // load list of thematique maps
+            function loadThematiques() {
+                $.ajax({ // create an ajax request to js/display.php
+                    type: "GET",
+                    url: "js/loadThematiques.php",
+                    dataType: "html", // expect html to be returned
+                    success: function (response) {
+                        $("#thematiqueList").html(response);
+                        // alert(response);
+                    }
+                });
+            };
+
+            $(document).ready(function () {
+                loadThematiques();
+            });
+        </script>
+
     </body>
 </html>
