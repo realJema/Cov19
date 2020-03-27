@@ -4,30 +4,47 @@ let new_death = document.getElementById("new_death");
 let total_death = document.getElementById("total_death");
 let total_recovered = document.getElementById("total_recovered");
 let total_cases = document.getElementById("total_cases");
+let local_death = document.getElementById("local_death");
+let local_recovered = document.getElementById("local_recovered");
+let local_cases = document.getElementById("local_cases");
 let table = document.getElementById('countries_stat')
 // Fetching the Data from the server
 
-//Fetching the World Data
-fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php", {
-    "method": "GET",
-    "headers": {
-        "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-        "x-rapidapi-key": "53009286a0mshdc8ec356f7aa205p1e0e80jsn5858f548ed53"
-    }
-})
-
-.then(response => response.json().then( data => {
-    // console.log(data);
-    total_cases.innerHTML = data.total_cases;
-    // new_cases.innerHTML = data.new_cases;
-    // new_death.innerHTML = data.new_deaths;
-    total_death.innerHTML = data.total_deaths;
-    total_recovered.innerHTML = data.total_recovered;
-
-})).catch(err => {
-    console.log(err);
-});
-
+function Update_Database(){
+    // This section updates the global statistics 
+    //Fetching the World Data
+    fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
+            "x-rapidapi-key": "53009286a0mshdc8ec356f7aa205p1e0e80jsn5858f548ed53"
+        }
+    })
+    
+    .then(response => response.json().then( data => {
+        // sending the data to my personal api 
+        (async () => {
+            const rawResponse = await fetch('http:localhost:5000/api/update', {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(cmr_data)
+            });
+            const content = await rawResponse;
+            console.log(content);
+          })();
+        // console.log(data);
+        total_cases.innerHTML = data.total_cases;
+        // new_cases.innerHTML = data.new_cases;
+        // new_death.innerHTML = data.new_deaths;
+        total_death.innerHTML = data.total_deaths;
+        total_recovered.innerHTML = data.total_recovered;
+    
+    })).catch(err => {
+        console.log(err);
+    });
 
 //Fetching The Case by Country Data
 fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php", {
@@ -43,25 +60,25 @@ fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.p
     let list_country = document.getElementById("country_stats");
 //Getting all the country statistic using a loop
     for(let i = 0; i<countries_stat.length;i++){
-        // console.log(countries_stat[i]);
-
-        var content = '<div class="country_stat col-12">';
-        content += '<div class="col-6">';
-        content += '<h3 class="country_name">' + countries_stat[i].country_name + '</h3>';
-        content += '</div>';
-        content += '<div class="col-6 info">';
-        content += '<p> Confirmed </p>';
-        content += '<p>' + countries_stat[i].cases + '</p>';
-        content += '</div">';
-        content += '</div>';
-
         if(countries_stat[i].country_name == 'Cameroon'){
-            //prepend text
-            old_content = list_country.innerHTML
-            list_country.innerHTML = content;
-            list_country.innerHTML += old_content;
-        } else {
-            // list_country.innerHTML += content; // this prevents all the data of the countries from being loaded
+           
+            // updating value in api 
+            var cmr_data = countries_stat[i];
+            (async () => {
+                const rawResponse = await fetch('http:localhost:5000/api/update/local', {
+                  method: 'POST',
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(cmr_data)
+                });
+                const content = await rawResponse;
+                console.log(content);
+              })();
+            local_cases.innerHTML = countries_stat[i].cases;
+            local_death.innerHTML = countries_stat[i].deaths;
+            local_recovered.innerHTML = countries_stat[i].total_recovered;
         }
 
     }
@@ -69,6 +86,22 @@ fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.p
 .catch(err => {
     console.log(err);
 });
+
+}
+(async () => {
+    const rawResponse = await fetch('http:localhost:5000/api/data', {
+      method: 'GET',
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+  })();
+
+
+
+
+
+
+
 
 var map = L.map('map', {
     center: [7.3, 12.3],

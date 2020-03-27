@@ -1,0 +1,22 @@
+{
+    "cmr_stat": {
+        "country_name": "Cameroon", 
+        "cases": "88", 
+        "deaths": "2", 
+        "region": "", 
+        "total_recovered": "2", 
+        "new_deaths": "1", 
+        "new_cases": "13", 
+        "serious_critical": "0", 
+        "active_cases": "84", 
+        "total_cases_per_1m_population": "3"
+    }, 
+    "glb_stat": {
+        "total_cases": "550,536", 
+        "total_deaths": "24,903", 
+        "total_recovered": "128,701", 
+        "new_cases": "18,726", 
+        "new_deaths": "835", 
+        "statistic_taken_at": "2020-03-27 12:49:05"
+    }
+}

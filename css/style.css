@@ -13,7 +13,7 @@
     left: 0;
     right: 0;
     box-sizing: border-box;
-    padding: 10px 5px;
+    padding: 10px 19px 10px 2px;
     font-size: 9.4pt;
 }
 
@@ -258,15 +258,23 @@ body {
     line-height: 24px;
     color: #555;
 }
+.info-content {
+    font-family: FiraGO, "IBM Plex Sans", system-ui, sans-serif;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+    display: block;
+    font-size: 1.1rem;
+}
 
 .communication {
     position: fixed;
     bottom: 0;
     right: 0;
     z-index: 1000;
-    margin: 2%;
+    margin: 1.5%;
     height: 50%;
     overflow-y: scroll;
+    padding: 0;
 }
 /* For Mobile */
 @media screen and(max-width: 540px) {
