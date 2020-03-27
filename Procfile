@@ -1,1 +1,1 @@
-web: python flapi.py
+web: gunicorn flapi:app
