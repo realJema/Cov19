@@ -3,10 +3,11 @@ from flask import request, jsonify
 from flask_cors import CORS
 import json
 import sys
+import pprint
 
 app = flask.Flask(__name__)
 CORS(app)
-app.config["DEBUG"] = True
+# app.config["DEBUG"] = True
 
 
 # funciton to return data 
@@ -17,24 +18,22 @@ def data():
 
 # funciton to return data 
 def updateLocal(cmr_stat):
-    data = ""
     # writing json response to file 
-    with open('data.txt', 'r') as json_file:
-        data = json.load(json_file)
+    with open('data.txt', 'r') as json_file_read:
+        data = json.load(json_file_read)
         data["cmr_stat"] = cmr_stat
-    with open('data.txt', 'w') as json_file:
-        json.dump(data, json_file)
+    with open('data.txt', 'w') as json_file_write:
+        json.dump(data, json_file_write)
     return 'Updated'
 
 # funciton to return data 
 def updateGlobal(glb_stat):
-    data = ""
     # writing json response to file 
-    with open('data.txt', 'r') as json_file:
-        data = json.load(json_file)
-        data["glb_stat"] = glb_stat
-    with open('data.txt', 'w') as json_file:
-        json.dump(data, json_file)
+    with open('data.txt', 'r') as json_file_read:
+        data = json.load(json_file_read)
+        data['glb_stat'] = glb_stat
+    with open('data.txt', 'w') as json_file_write:
+        json.dump(data, json_file_write)
     return 'Updated'
 
 
@@ -73,4 +72,7 @@ def updateGlobalData():
 def page_not_found(e):
     return "<h1>404</h1><p>The resource could not be found.</p>", 404
 
-app.run()
+
+if __name__ == '__main__':
+    # Threaded option to enable multiple instances for multiple user access support
+    app.run(threaded=True, port=5000)
