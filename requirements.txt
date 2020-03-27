@@ -9,7 +9,6 @@ Flask==1.1.1
 Flask-Cors==3.0.8
 isort==4.3.21
 itsdangerous==1.1.0
-Jinja2==2.11.1
 lazy-object-proxy==1.4.3
 MarkupSafe==1.1.1
 mccabe==0.6.1
@@ -20,3 +19,5 @@ six==1.13.0
 virtualenv==20.0.4
 Werkzeug==1.0.0
 wrapt==1.11.2
+Click==7.0
+gunicorn==19.9.0
