@@ -30,7 +30,7 @@ function update_Database() {
         // flask
         (async () => {
           const rawResponse = await fetch(
-            "http:localhost:5000/api/update/global",
+            "https://covid-237.herokuapp.com/api/update/global",
             {
               method: "POST",
               headers: {
@@ -72,7 +72,7 @@ function update_Database() {
             var cmr_data = countries_stat[i];
             (async () => {
               const rawResponse = await fetch(
-                "http:localhost:5000/api/update/local",
+                "https://covid-237.herokuapp.com/api/update/local",
                 {
                   method: "POST",
                   headers: {
@@ -97,7 +97,7 @@ function update_Database() {
 // getting the data from the local api and displaying it
 function fetch_Data(){
     (async () => {
-      const rawResponse = await fetch("http:localhost:5000/api/data", {
+      const rawResponse = await fetch("https://covid-237.herokuapp.com/api/data", {
         method: "GET"
       });
 
