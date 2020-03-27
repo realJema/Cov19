@@ -106,7 +106,11 @@ function fetch_Data(){
       
       const content = await rawResponse.json();
     //   console.log(content);
-    
+      setValue(content)
+    })();
+}
+// updating the values on the frontend 
+function setValue(content) {
       // displaying data on the view
       total_cases.innerHTML = content["glb_stat"].total_cases;
       total_death.innerHTML = content["glb_stat"].total_deaths;
@@ -114,7 +118,6 @@ function fetch_Data(){
       local_cases.innerHTML = content["cmr_stat"].cases;
       local_death.innerHTML = content["cmr_stat"].deaths;
       local_recovered.innerHTML = content["cmr_stat"].total_recovered;
-    })();
 }
 
 
@@ -124,7 +127,7 @@ fetch_Data()
 
 
 
-
+// This section is used to create the map 
 
 var map = L.map("map", {
   center: [7.3, 12.3],
@@ -201,7 +204,7 @@ L.control.layers(baseLayers, overlayLayers, { collapsed: true }).addTo(map);
 
 // adding the sidebar to the map
 L.control.sidebar("sidebar").addTo(map);
-var legend = L.control({ position: "bottomright" });
+// var legend = L.control({ position: "bottomright" });
 
 // all the layers go into this layer group
 var layerGroup = L.layerGroup().addTo(map);
@@ -218,14 +221,16 @@ legend.addTo(map);
 
 // adding markers for identified cases
 yde = L.marker([3.848, 11.5021]);
-yde.bindPopup("6 Cases Identifier ici");
+yde.bindPopup("60 Cases Identifier ici");
 yde.on("mouseover", function(ev) {
   yde.openPopup();
 });
 yde.addTo(map);
+
+
 // adding markers for identified cases
 baf = L.marker([5.4816, 10.4271]);
-baf.bindPopup("1 Cases Identifier ici");
+baf.bindPopup("3 Cases Identifier ici");
 baf.on("mouseover", function(ev) {
   baf.openPopup();
 });
@@ -233,7 +238,7 @@ baf.on("mouseover", function(ev) {
 baf.addTo(map);
 // adding markers for identified cases
 dla = L.marker([4.0511, 9.7679]);
-dla.bindPopup("9 Cases Identifier ici");
+dla.bindPopup("25 Cases Identifier ici");
 dla.on("mouseover", function(ev) {
   dla.openPopup();
 });

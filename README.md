@@ -15,3 +15,11 @@ Bootstrap
 
 ## API 
 https://rapidapi.com/astsiatsko/api/coronavirus-monitor
+
+## Todo List 
+[] add sponsors
+[] change marker icons 
+[] update informations
+[] Explore other geoportals 
+[] Add mini planet 
+[]
