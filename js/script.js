@@ -8,6 +8,13 @@ let local_death = document.getElementById("local_death");
 let local_recovered = document.getElementById("local_recovered");
 let local_cases = document.getElementById("local_cases");
 let table = document.getElementById("countries_stat");
+
+// storing the data locally
+let local_content = {
+  "yde": 60,
+  "dla": 25,
+  "baf": 300,
+};
 // Fetching the Data from the server
 
 function update_Database() {
@@ -221,7 +228,7 @@ legend.addTo(map);
 
 // adding markers for identified cases
 yde = L.marker([3.848, 11.5021]);
-yde.bindPopup("60 Cases Identifier ici");
+yde.bindPopup(local_content["yde"] + " Cases Identifier ici");
 yde.on("mouseover", function(ev) {
   yde.openPopup();
 });
@@ -230,7 +237,7 @@ yde.addTo(map);
 
 // adding markers for identified cases
 baf = L.marker([5.4816, 10.4271]);
-baf.bindPopup("3 Cases Identifier ici");
+baf.bindPopup(local_content["baf"] + " Cases Identifier ici");
 baf.on("mouseover", function(ev) {
   baf.openPopup();
 });
@@ -238,7 +245,7 @@ baf.on("mouseover", function(ev) {
 baf.addTo(map);
 // adding markers for identified cases
 dla = L.marker([4.0511, 9.7679]);
-dla.bindPopup("25 Cases Identifier ici");
+dla.bindPopup(local_content["dla"] + " Cases Identifier ici");
 dla.on("mouseover", function(ev) {
   dla.openPopup();
 });
