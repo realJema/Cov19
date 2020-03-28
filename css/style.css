@@ -13,10 +13,19 @@
     left: 0;
     right: 0;
     box-sizing: border-box;
-    padding: 10px 19px 10px 2px;
+    padding: 15px;
     font-size: 9.4pt;
 }
+.sidebar-left ~ .map {
+    margin-left: 0;
+}
+.leaflet-left .leaflet-control {
+    margin-left: 40px;
+}
 
+.sidebar-tabs, .sidebar-tabs > ul {
+    background-color: red;
+}
 /*css for sidebar*/
 .sidebar {
     position: absolute;
@@ -28,6 +37,8 @@
     top: 0 !important;
     bottom: 0 !important;
     left: 0 !important;
+    
+    margin: 10px;
 }
 
 /*Acco*/
@@ -314,7 +325,14 @@ body {
     color: red;
 }
 
-
+.sidebar {
+    
+    margin: 10px;
+    box-shadow: none;
+}
+.sidebar-left .sidebar-tabs {
+    height: 5%;
+}
 /* spinner  */
 
 #loading {
@@ -344,6 +362,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .hide {
