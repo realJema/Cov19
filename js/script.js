@@ -8,6 +8,7 @@ let local_death = document.getElementById("local_death");
 let local_recovered = document.getElementById("local_recovered");
 let local_cases = document.getElementById("local_cases");
 let table = document.getElementById("countries_stat");
+let d = document.getElementById("loader");
 
 // storing the data locally
 let local_content = {
@@ -113,8 +114,9 @@ function fetch_Data(){
       
       const content = await rawResponse.json();
     //   console.log(content);
-      setValue(content)
-    })();
+      setValue(content);
+      d.className += " hide";
+  })();
 }
 // updating the values on the frontend 
 function setValue(content) {
@@ -126,7 +128,6 @@ function setValue(content) {
       local_death.innerHTML = content["cmr_stat"].deaths;
       local_recovered.innerHTML = content["cmr_stat"].total_recovered;
 }
-
 
 update_Database()
 fetch_Data()
@@ -220,11 +221,27 @@ var legend = L.control({ position: "bottomleft" });
 
 legend.onAdd = function(map) {
   var div = L.DomUtil.create("div", "legend");
-  div.innerHTML += "<p>Created by <b>NATIVE</b></p>";
+  div.innerHTML += "<p>Created by <b>NATIVE</b> | Sponsored by <a href=\"https://aritmacameroun.com/en/home/\"><img class=\"aritma_logo\" style=\"width: 70px;\" src=\"aritma.png\" alt=\"aritma logo\"></a> </p>";
   return div;
 };
 
 legend.addTo(map);
+
+
+// custom icon 
+var LeafIcon = L.Icon.extend({
+  options: {
+      shadowUrl: 'leaf-shadow.png',
+      iconSize:     [38, 50],
+      shadowSize:   [50, 64],
+      iconAnchor:   [22, 34],
+      shadowAnchor: [4, 62],
+      popupAnchor:  [-3, -76]
+  }
+});
+
+var virusIcon = new LeafIcon({iconUrl: 'favicon.ico'});
+
 
 // adding markers for identified cases
 yde = L.marker([3.848, 11.5021]);
@@ -255,3 +272,4 @@ dla.addTo(map);
 $(document).ready(function() {
   document.getElementById("openSidebar").click();
 });
+
