@@ -335,7 +335,7 @@ body {
     to { -webkit-transform: rotate(360deg); }
   }
 
-#loader {
+#myloader {
     position: fixed;
     background-color: white;
     z-index: 10000;

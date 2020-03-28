@@ -8,7 +8,7 @@ let local_death = document.getElementById("local_death");
 let local_recovered = document.getElementById("local_recovered");
 let local_cases = document.getElementById("local_cases");
 let table = document.getElementById("countries_stat");
-let d = document.getElementById("loader");
+let myspinner = document.getElementById("myloader");
 
 // storing the data locally
 let local_content = {
@@ -115,7 +115,7 @@ function fetch_Data(){
       const content = await rawResponse.json();
     //   console.log(content);
       setValue(content);
-      d.className += " hide";
+      myspinner.className += " hide";
   })();
 }
 // updating the values on the frontend 
