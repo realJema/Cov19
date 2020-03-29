@@ -333,6 +333,19 @@ body {
 .sidebar-left .sidebar-tabs {
     height: 5%;
 }
+
+.sidebar-left .sidebar-content {
+    left: 0px;
+    z-index: -10;
+}
+
+.sidebar.collapsed > .sidebar-content {
+    -webkit-transition: opacity 0.53s ease-in-out;
+    -moz-transition: opacity 0.53s ease-in-out;
+    -ms-transition: opacity 0.53s ease-in-out;
+    -o-transition: opacity 0.53s ease-in-out;
+     opacity: 0;
+}
 /* spinner  */
 
 #loading {
