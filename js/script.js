@@ -11,11 +11,39 @@ let table = document.getElementById("countries_stat");
 let myspinner = document.getElementById("myloader");
 
 // storing the data locally
-let local_content = {
-  "yde": 60,
-  "dla": 25,
-  "baf": 300,
-};
+let local_data = {
+  "last_update": "",
+  "cmr_stat": {
+      "country_name": "Cameroon",
+      "cases": "88",
+      "deaths": "2",
+      "region": "",
+      "total_recovered": "2",
+      "new_deaths": "1",
+      "new_cases": "13",
+      "serious_critical": "0",
+      "active_cases": "84",
+      "total_cases_per_1m_population": "3"
+  },
+  "glb_stat": {
+      "total_cases": "565,044",
+      "total_deaths": "25,410",
+      "total_recovered": "129,309",
+      "new_cases": "33,234",
+      "new_deaths": "1,342",
+      "statistic_taken_at": "2020-03-27 16:01:07"
+  },
+  "local_stat": {
+      "total": 92,
+      "cases": "88",
+      "deaths": "2",
+      "total_recovered": "2",
+      "yde": 60,
+      "dla": 25,
+      "baf": 300
+  }
+}
+
 // Fetching the Data from the server
 
 function update_Database() {
@@ -120,16 +148,26 @@ function fetch_Data(){
 }
 // updating the values on the frontend 
 function setValue(content) {
+      // we compare the data fetched and the local data and priority is given to the local data
+      if(local_data["cmr_stat"]["cases"] < local_data["local_stat"]["cases"]){
+        actual_cases = local_data["local_stat"]["cases"];
+      }
+      if(local_data["cmr_stat"]["deaths"] < local_data["local_stat"]["deaths"]){
+        actual_deaths = local_data["local_stat"]["deaths"];
+      }
+      if(local_data["cmr_stat"]["total_recovered"] < local_data["local_stat"]["total_recovered"]){
+        actual_recovered = local_data["local_stat"]["total.total_recovered"];
+      }
       // displaying data on the view
       total_cases.innerHTML = content["glb_stat"].total_cases;
       total_death.innerHTML = content["glb_stat"].total_deaths;
       total_recovered.innerHTML = content["glb_stat"].total_recovered;
-      local_cases.innerHTML = content["cmr_stat"].cases;
-      local_death.innerHTML = content["cmr_stat"].deaths;
-      local_recovered.innerHTML = content["cmr_stat"].total_recovered;
+      local_cases.innerHTML = actual_cases;
+      local_death.innerHTML = actual_deaths;
+      local_recovered.innerHTML = actual_total_recovered;
 }
 
-update_Database()
+// update_Database()
 fetch_Data()
 
 
@@ -245,7 +283,7 @@ var virusIcon = new LeafIcon({iconUrl: 'favicon.ico'});
 
 // adding markers for identified cases
 yde = L.marker([3.848, 11.5021]);
-yde.bindPopup(local_content["yde"] + " Cases Identifier ici");
+yde.bindPopup(local_data["local_stat"]["yde"] + " Cases Identifier ici");
 yde.on("mouseover", function(ev) {
   yde.openPopup();
 });
@@ -254,7 +292,7 @@ yde.addTo(map);
 
 // adding markers for identified cases
 baf = L.marker([5.4816, 10.4271]);
-baf.bindPopup(local_content["baf"] + " Cases Identifier ici");
+baf.bindPopup(local_data["local_stat"]["baf"] + " Cases Identifier ici");
 baf.on("mouseover", function(ev) {
   baf.openPopup();
 });
@@ -262,7 +300,7 @@ baf.on("mouseover", function(ev) {
 baf.addTo(map);
 // adding markers for identified cases
 dla = L.marker([4.0511, 9.7679]);
-dla.bindPopup(local_content["dla"] + " Cases Identifier ici");
+dla.bindPopup(local_data["local_stat"]["dla"] + " Cases Identifier ici");
 dla.on("mouseover", function(ev) {
   dla.openPopup();
 });
