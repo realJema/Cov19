@@ -15,10 +15,10 @@ let local_data = {
   "last_update": "",
   "cmr_stat": {
       "country_name": "Cameroon",
-      "cases": "88",
-      "deaths": "2",
+      "cases": "193",
+      "deaths": "6",
       "region": "",
-      "total_recovered": "2",
+      "total_recovered": "10",
       "new_deaths": "1",
       "new_cases": "13",
       "serious_critical": "0",
@@ -142,33 +142,28 @@ function fetch_Data(){
       
       const content = await rawResponse.json();
     //   console.log(content);
-      setValue(content);
+      // setValue(content);
       myspinner.className += " hide";
   })();
 }
 // updating the values on the frontend 
 function setValue(content) {
-      // we compare the data fetched and the local data and priority is given to the local data
-      if(local_data["cmr_stat"]["cases"] < local_data["local_stat"]["cases"]){
-        actual_cases = local_data["local_stat"]["cases"];
-      }
-      if(local_data["cmr_stat"]["deaths"] < local_data["local_stat"]["deaths"]){
-        actual_deaths = local_data["local_stat"]["deaths"];
-      }
-      if(local_data["cmr_stat"]["total_recovered"] < local_data["local_stat"]["total_recovered"]){
-        actual_recovered = local_data["local_stat"]["total.total_recovered"];
-      }
+      
       // displaying data on the view
       total_cases.innerHTML = content["glb_stat"].total_cases;
       total_death.innerHTML = content["glb_stat"].total_deaths;
       total_recovered.innerHTML = content["glb_stat"].total_recovered;
-      local_cases.innerHTML = actual_cases;
-      local_death.innerHTML = actual_deaths;
-      local_recovered.innerHTML = actual_total_recovered;
+      local_cases.innerHTML = content["cmr_stat"].cases;
+      local_death.innerHTML = content["cmr_stat"].deaths;
+      local_recovered.innerHTML = content["cmr_stat"].total_recovered;
+
+      // remove the spinner 
+      
+      myspinner.className += " hide";
 }
 
 // update_Database()
-fetch_Data()
+setValue(local_data)
 
 
 
