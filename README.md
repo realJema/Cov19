@@ -22,4 +22,3 @@ https://rapidapi.com/astsiatsko/api/coronavirus-monitor
 [] update informations
 [] Explore other geoportals 
 [] Add mini planet 
-[]

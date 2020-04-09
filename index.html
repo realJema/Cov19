@@ -1,119 +1,174 @@
 <!-- Created by @NATIVE-Inc -->
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>TRACKING COVID-19 CAMEROUN</title>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta
-        http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <!-- Leaflet style. REQUIRED! -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"/>
-		<link rel="stylesheet" href="css/leaflet-sidebar.css"/>
-		<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
-        <!-- include css file -->
+  <head>
+    <title>TRACKING COVID-19 CAMEROUN</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Leaflet style. REQUIRED! -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <!-- include css file -->
 
-        <!-- including bootstrap -->
-        <link
-        rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> <!-- end of boostrap -->
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-    </head>
-    <body>
-		<!-- this will show our spinner -->
-		<div id="myloader" class="myloader">
-			<p style="font-size: 2em;">NATIVE</p><br/>
-			<div id="loading"></div>
-		</div>
-        <div class="col-md-12" style="padding: 0;">
-			<!-- This is the sidebar  -->
+    <!-- including bootstrap -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <!-- end of boostrap -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
 
-			<div id="sidebar" class="sidebar collapsed">
-				<!-- Nav tabs -->
-				<!-- adding the mini globe to map  -->
-				<div class="sidebar-tabs">
-					<ul role="tablist">
-						<li>
-							<a href="#home" role="tab" id="openSidebar">
-								<i class="fa fa-bars"></i>
-							</a>
-						</li>
-					</ul>
-				</div>
+  <body>
+    <!-- this will show our spinner -->
+    <div id="myloader" class="myloader">
+      <p style="font-size: 2em;">NATIVE</p>
+      <br />
+      <div id="loading"></div>
+    </div>
+    <div class="col-md-12" style="padding: 0;">
+      <!-- This is the sidebar  -->
 
-				<!-- Tab panes -->
-				<div class="sidebar-content">
-					<div class="sidebar-pane" id="home">
-						<div><br/><br/>
-							<h2 class="title">Tracking Cameroon COVID-19</h2>
-							<p class="info-content">
-								The first case of the new Coronavirus COVID-19 was recorded on 31 December in Wuhan, China (WHO). Since then, 197,145 confirmed cases have been recorded worldwide. This visualization shows the near real-time status based on data from the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University and DXY. Data currently available on the following zoom levels: City level - US, Canada and Australia; Province level - China; Country level - other countries. Learn how this map was created.</p><br/>
-							</div>
-							<h5>Global Statistics</h5>
-							<div class="global_stat row">
-								<div class="col-4 box">
-									<h5 class="figures" id="total_death"></h5>
-									<p class="subtitle">Deaths</p>
-								</div>
-								<div class="col-4 box">
-									<h5 class="figures" id="total_recovered"></h5>
-									<p class="subtitle">Recovery</p>
-							</div>
-							
-							<div class="col-4 box">
-								<h5 class="figures" id="total_cases"></h5>
-								<p class="subtitle">Case</p>
-							</div>
-						</div><br/>
-						<h5>Cameroon Statistics</h5>
-						<div class="local_stat row">
-							<div class="col-4 box">
-								<h5 class="figures" id="local_death"></h5>
-								<p class="subtitle">Deaths</p>
-							</div>
-							<div class="col-4 box">
-								<h5 class="figures" id="local_recovered"></h5>
-								<p class="subtitle">Recovery</p>
-							</div>
+      <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <!-- adding the mini globe to map  -->
+        <div class="sidebar-tabs">
+          <ul role="tablist">
+            <li>
+              <a href="#home" role="tab" id="openSidebar">
+                <i class="fa fa-bars"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
 
-							<div class="col-4 box">
-								<h5 class="figures" id="local_cases"></h5>
-								<p class="subtitle">Cases</p>
-							</div>
-						</div><br/><br/><br/>
-						<!-- <div class="row" id="country_stats"></div> -->
-					</div>
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+          <div class="sidebar-pane" id="home">
+            <div>
+              <br /><br />
+              <h6 class="title">Tracking Cameroon COVID-19</h6>
 
-				</div>
-			</div>
-			<!-- end of sidebar -->
+              <h5>Global Statistics</h5>
+              <div class="global_stat row">
+                <div class="col-4 box">
+                  <h5 class="figures" id="total_death"></h5>
+                  <p class="subtitle">Deaths</p>
+                </div>
+                <div class="col-4 box">
+                  <h5 class="figures" id="total_recovered"></h5>
+                  <p class="subtitle">Recovery</p>
+                </div>
 
-			<!-- The map goes here -->
-			<div id="map" class="map"></div>
-			<!-- end of the map -->
+                <div class="col-4 box">
+                  <h5 class="figures" id="total_cases"></h5>
+                  <p class="subtitle">Case</p>
+                </div>
+              </div>
+              <br />
+              <h5>Cameroon Statistics</h5>
+              <div class="local_stat row">
+                <div class="col-4 box">
+                  <h5 class="figures" id="local_death"></h5>
+                  <p class="subtitle">Deaths</p>
+                </div>
+                <div class="col-4 box">
+                  <h5 class="figures" id="local_recovered"></h5>
+                  <p class="subtitle">Recovery</p>
+                </div>
 
-			<!-- tweets du ministre -->
-			<div class="communication">
-				<!-- lien vers le twitter feed du Dr Manaouda -> Ministre de la Sante au Cameroun -->
-				<h6>Ministre de la Sante</h6>
-				<div class="tweet_feed">
-					<a class="twitter-timeline" href="https://twitter.com/DrManaouda?ref_src=twsrc%5Etfw">Ministre de la Sante
-						<b>Dr. Manaouda Malachie</b>
-					</a>
-					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-				</div>
-			</div>
-		</div>
-        <!-- The scripts go here -->
-        <script src="js/leaflet.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="js/leaflet.ajax.min.js"></script>
-        <script src="js/leaflet-providers.js"></script>
-        <script src="js/leaflet-sidebar.js"></script>
-        <script src="js/script.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+                <div class="col-4 box">
+                  <h5 class="figures" id="local_cases"></h5>
+                  <p class="subtitle">Cases</p>
+                </div>
+              </div>
+              <br />
+              <!-- <div class="row" id="country_stats"></div> -->
+              <ul>
+                <li>
+                  <b>Stay home</b> if you can and avoid any non-essential
+                  travel. Avoid social gatherings of more than 10 people.<br />
+                </li>
+                <li>
+                  <b>Practice social distancing</b> by keeping at least 6 feet —
+                  about two arm lengths — away from others if you must go out in
+                  public. Stay connected with loved ones through video and phone
+                  calls, texts and social media. Avoid close contact with people
+                  who are sick.<br />
+                </li>
+                <li>
+                  <b>Wash your hands often</b> with soap and water for at least
+                  20 seconds, especially after being in a public place, or after
+                  blowing your nose, coughing or sneezing. If soap and water are
+                  not readily available, use a hand sanitizer with at least 60%
+                  alcohol.<br />
+                </li>
+                <li>
+                  <b>Avoid touching your eyes, nose and mouth</b> with unwashed
+                  hands.<br />
+                </li>
+                <li>
+                  <b>Clean and disinfect household surfaces</b> daily and
+                  high-touch surfaces frequently throughout the day. High-touch
+                  surfaces include phones, remote controls, counters, tabletops,
+                  doorknobs, bathroom fixtures, toilets, keyboards, tablets and
+                  bedside tables. Follow
+                  <a
+                    href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cleaning-disinfection.html"
+                    target="_blank"
+                    >CDC guidance</a
+                  >.<br />
+                </li>
+                <li>
+                  <b>Cover your coughs and sneezes</b>. Use a tissue to cover
+                  your nose and mouth, and throw used tissues in a lined trash
+                  can. If a tissue isn’t available, cough or sneeze into your
+                  elbow — not your hands. Wash your hands immediately.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of sidebar -->
 
+      <!-- The map goes here -->
+      <div id="map" class="map"></div>
+      <!-- end of the map -->
 
-    </body>
+      <!-- tweets du ministre -->
+      <div class="communication">
+        <!-- lien vers le twitter feed du Dr Manaouda -> Ministre de la Sante au Cameroun -->
+        <h6>Ministre de la Sante</h6>
+        <div class="tweet_feed">
+          <a
+            class="twitter-timeline"
+            href="https://twitter.com/DrManaouda?ref_src=twsrc%5Etfw"
+            >Ministre de la Sante
+            <b>Dr. Manaouda Malachie</b>
+          </a>
+          <script
+            async="async"
+            src="https://platform.twitter.com/widgets.js"
+            charset="utf-8"
+          ></script>
+        </div>
+      </div>
+    </div>
+    <!-- The scripts go here -->
+    <script src="js/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/leaflet.ajax.min.js"></script>
+    <script src="js/leaflet-providers.js"></script>
+    <script src="js/leaflet-sidebar.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>

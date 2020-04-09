@@ -15,7 +15,7 @@ let local_data = {
   "last_update": "",
   "cmr_stat": {
       "country_name": "Cameroon",
-      "cases": "193",
+      "cases": "233",
       "deaths": "6",
       "region": "",
       "total_recovered": "10",
@@ -26,9 +26,9 @@ let local_data = {
       "total_cases_per_1m_population": "3"
   },
   "glb_stat": {
-      "total_cases": "565,044",
-      "total_deaths": "25,410",
-      "total_recovered": "129,309",
+      "total_cases": "874,615",
+      "total_deaths": "43,430",
+      "total_recovered": "184,952",
       "new_cases": "33,234",
       "new_deaths": "1,342",
       "statistic_taken_at": "2020-03-27 16:01:07"
@@ -47,105 +47,29 @@ let local_data = {
 // Fetching the Data from the server
 
 function update_Database() {
-  // This section updates the global statistics
-  //Fetching the World Data from rapid api servers 
-//   this fucntion gets the global statistics 
-  fetch(
-    "https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php",
-    {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-        "x-rapidapi-key": "53009286a0mshdc8ec356f7aa205p1e0e80jsn5858f548ed53"
-      }
-    }
-  )
-    .then(response =>
-      response.json().then(data => {
-        // sending the data to my personal api
-        // flask
-        (async () => {
-          const rawResponse = await fetch(
-            "https://covid-237.herokuapp.com/api/update/global",
-            {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(data)
-            }
-          );
-          const content = await rawResponse;
-        //   console.log(content);
-        })();
-      })
-    )
-    .catch(err => {
-      console.log(err);
-    });
-
-  //Fetching The Case by Country Data
 //   I get all the data and filter through using a for loop
-  fetch(
-    "https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php",
-    {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-        "x-rapidapi-key": "53009286a0mshdc8ec356f7aa205p1e0e80jsn5858f548ed53"
-      }
-    }
-  )
-    .then(response =>
-      response.json().then(data => {
-        // console.log(data)
-        let countries_stat = data.countries_stat;
-        //Getting all the country statistic using a loop
-        for (let i = 0; i < countries_stat.length; i++) {
-          if (countries_stat[i].country_name == "Cameroon") {
-            // updating value in my personal api 
-            var cmr_data = countries_stat[i];
-            (async () => {
-              const rawResponse = await fetch(
-                "https://covid-237.herokuapp.com/api/update/local",
-                {
-                  method: "POST",
-                  headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify(cmr_data)
-                }
-              );
-              const content = await rawResponse;
-            //   console.log(content);
-            })();
-          }
-        }
-      })
-    )
-    .catch(err => {
-      console.log(err);
-    });
-}
-
-// getting the data from the local api and displaying it
-function fetch_Data(){
-    (async () => {
-      const rawResponse = await fetch("https://covid-237.herokuapp.com/api/data", {
-        method: "GET"
+$.ajax({
+  type:"GET",
+  dataType: "json",
+  url: "https://bing.com/covid/data",
+  success: function(data){
+      var corona_cases = [];
+      $.each(data, function(key, value){
+          // if (value.id == "cameroon") {
+          //   // updating value in my personal api 
+          //   var cmr_data = countries_stat[i];
+          //   console.log("found country")
+          //   console.log(cmr_data)
+          // }
+          console.log(key);
+          console.log(value);
+          console.log('----------------------------------------------')
       });
-
-      // implement a local file fetch in case your own api fails 
-
-      
-      const content = await rawResponse.json();
-    //   console.log(content);
-      // setValue(content);
-      myspinner.className += " hide";
-  })();
+    }
+    });
+return false;
 }
+
 // updating the values on the frontend 
 function setValue(content) {
       
@@ -162,8 +86,9 @@ function setValue(content) {
       myspinner.className += " hide";
 }
 
+update_Database();
 // update_Database()
-setValue(local_data)
+setValue(local_data);
 
 
 
@@ -172,7 +97,7 @@ setValue(local_data)
 
 var map = L.map("map", {
   center: [7.3, 12.3],
-  zoom: 6
+  zoom: 7
 });
 
 var defaultLayer = L.tileLayer.provider("OpenStreetMap.Mapnik").addTo(map);
@@ -276,8 +201,15 @@ var LeafIcon = L.Icon.extend({
 var virusIcon = new LeafIcon({iconUrl: 'favicon.ico'});
 
 
+styles = {
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5,
+  radius: 25000
+}
+
 // adding markers for identified cases
-yde = L.marker([3.848, 11.5021]);
+yde = L.circle([3.848, 11.5021], styles);
 yde.bindPopup(local_data["local_stat"]["yde"] + " Cases Identifier ici");
 yde.on("mouseover", function(ev) {
   yde.openPopup();
@@ -285,16 +217,16 @@ yde.on("mouseover", function(ev) {
 yde.addTo(map);
 
 
-// adding markers for identified cases
-baf = L.marker([5.4816, 10.4271]);
+// adding circles for identified cases
+baf = L.circle([5.4816, 10.4271], styles);
 baf.bindPopup(local_data["local_stat"]["baf"] + " Cases Identifier ici");
 baf.on("mouseover", function(ev) {
   baf.openPopup();
 });
 
 baf.addTo(map);
-// adding markers for identified cases
-dla = L.marker([4.0511, 9.7679]);
+// adding circles for identified cases
+dla = L.circle([4.0511, 9.7679], styles);
 dla.bindPopup(local_data["local_stat"]["dla"] + " Cases Identifier ici");
 dla.on("mouseover", function(ev) {
   dla.openPopup();
