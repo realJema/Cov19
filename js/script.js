@@ -15,10 +15,10 @@ let local_data = {
   "last_update": "",
   "cmr_stat": {
       "country_name": "Cameroon",
-      "cases": "233",
-      "deaths": "6",
+      "cases": "730",
+      "deaths": "10",
       "region": "",
-      "total_recovered": "10",
+      "total_recovered": "67",
       "new_deaths": "1",
       "new_cases": "13",
       "serious_critical": "0",
@@ -26,8 +26,8 @@ let local_data = {
       "total_cases_per_1m_population": "3"
   },
   "glb_stat": {
-      "total_cases": "874,615",
-      "total_deaths": "43,430",
+      "total_cases": "1,511,104",
+      "total_deaths": "88,338",
       "total_recovered": "184,952",
       "new_cases": "33,234",
       "new_deaths": "1,342",
@@ -43,52 +43,57 @@ let local_data = {
       "baf": 300
   }
 }
-
 // Fetching the Data from the server
 
+// updating the values on the frontend 
+function setValueGlobal(glb_data) {
+  // displaying data on the view
+  total_cases.innerHTML = glb_data.confirmed;
+  total_death.innerHTML = glb_data.deaths;
+  total_recovered.innerHTML = glb_data.recovered;
+
+  // remove the spinner 
+  
+  myspinner.className += " hide";
+}
+function setValueLocal(cmr_data) {
+  // displaying data on the view
+  local_cases.innerHTML = cmr_data.latest_data.confirmed;
+  local_death.innerHTML = cmr_data.latest_data.deaths;
+  local_recovered.innerHTML = cmr_data.latest_data.recovered;
+
+  // remove the spinner 
+  
+  myspinner.className += " hide";
+}
 function update_Database() {
-//   I get all the data and filter through using a for loop
+//   api call for cameroon data
 $.ajax({
   type:"GET",
   dataType: "json",
-  url: "https://bing.com/covid/data",
+  url: "https://cors-anywhere.herokuapp.com/http://corona-api.com/countries/CM",
   success: function(data){
-      var corona_cases = [];
-      $.each(data, function(key, value){
-          // if (value.id == "cameroon") {
-          //   // updating value in my personal api 
-          //   var cmr_data = countries_stat[i];
-          //   console.log("found country")
-          //   console.log(cmr_data)
-          // }
-          console.log(key);
-          console.log(value);
-          console.log('----------------------------------------------')
-      });
+    response = data.data;
+    setValueLocal(response);
     }
     });
-return false;
+
+    // api call for global data 
+$.ajax({
+  type:"GET",
+  dataType: "json",
+  url: "https://cors-anywhere.herokuapp.com/https://corona-api.com/timeline",
+  success: function(data){
+    response = data.data;
+    glb_data = response[0];
+    setValueGlobal(glb_data);
+    }
+    });
 }
 
-// updating the values on the frontend 
-function setValue(content) {
-      
-      // displaying data on the view
-      total_cases.innerHTML = content["glb_stat"].total_cases;
-      total_death.innerHTML = content["glb_stat"].total_deaths;
-      total_recovered.innerHTML = content["glb_stat"].total_recovered;
-      local_cases.innerHTML = content["cmr_stat"].cases;
-      local_death.innerHTML = content["cmr_stat"].deaths;
-      local_recovered.innerHTML = content["cmr_stat"].total_recovered;
-
-      // remove the spinner 
-      
-      myspinner.className += " hide";
-}
 
 update_Database();
 // update_Database()
-setValue(local_data);
 
 
 
@@ -237,4 +242,13 @@ dla.addTo(map);
 $(document).ready(function() {
   document.getElementById("openSidebar").click();
 });
+
+
+
+// toggle tweets of minister 
+function toggleTweets() {
+  document.getElementById('communication').classList.toggle('hide');
+}
+
+document.querySelector('.tweets_toggle').addEventListener('click', toggleTweets);
 

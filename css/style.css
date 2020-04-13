@@ -276,6 +276,17 @@ body {
     font-size: 1.1rem;
 }
 
+.tweets_toggle{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 1001;
+    margin: 1.5%;
+}
+.hide {
+    visibility: hidden;
+    opacity: 0;
+}
 .communication {
     position: fixed;
     bottom: 0;
