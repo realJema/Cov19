@@ -44,13 +44,15 @@ let local_data = {
   }
 }
 // Fetching the Data from the server
-
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 // updating the values on the frontend 
 function setValueGlobal(glb_data) {
   // displaying data on the view
-  total_cases.innerHTML = glb_data.confirmed;
-  total_death.innerHTML = glb_data.deaths;
-  total_recovered.innerHTML = glb_data.recovered;
+  total_cases.innerHTML = numberWithCommas(glb_data.confirmed);
+  total_death.innerHTML = numberWithCommas(glb_data.deaths);
+  total_recovered.innerHTML = numberWithCommas(glb_data.recovered);
 
   // remove the spinner 
   
@@ -58,14 +60,15 @@ function setValueGlobal(glb_data) {
 }
 function setValueLocal(cmr_data) {
   // displaying data on the view
-  local_cases.innerHTML = cmr_data.latest_data.confirmed;
-  local_death.innerHTML = cmr_data.latest_data.deaths;
-  local_recovered.innerHTML = cmr_data.latest_data.recovered;
+  local_cases.innerHTML = numberWithCommas(cmr_data.latest_data.confirmed);
+  local_death.innerHTML = numberWithCommas(cmr_data.latest_data.deaths);
+  local_recovered.innerHTML = numberWithCommas(cmr_data.latest_data.recovered);
 
   // remove the spinner 
   
   myspinner.className += " hide";
 }
+
 function update_Database() {
 //   api call for cameroon data
 $.ajax({
