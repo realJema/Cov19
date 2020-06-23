@@ -209,37 +209,37 @@ var LeafIcon = L.Icon.extend({
 var virusIcon = new LeafIcon({iconUrl: 'favicon.ico'});
 
 
-styles = {
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5,
-  radius: 25000
+// function to determine circle size 
+function getStyle(cases=50){
+  styles = {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: cases*100
+  }
+  return styles
+
 }
 
 // adding markers for identified cases
-yde = L.circle([3.848, 11.5021], styles);
-yde.bindPopup(local_data["local_stat"]["yde"] + " Cases Identifier ici");
-yde.on("mouseover", function(ev) {
-  yde.openPopup();
-});
-yde.addTo(map);
+baf = L.circle([5.4816, 10.4271], getStyle()).addTo(map);
+dla = L.circle([4.0511, 9.7679], getStyle()).addTo(map);
+adamoua = L.circle([6.9182, 12.8055], getStyle()).addTo(map);
+centre = L.circle([3.848, 11.5021], getStyle(691)).addTo(map);
+nord = L.circle([8.5809, 13.9144], getStyle()).addTo(map);
+sud = L.circle([2.7203, 11.7068], getStyle(5)).addTo(map);
+littoral = L.circle([4.1682, 10.0807], getStyle(382)).addTo(map);
+ouest = L.circle([5.4638, 10.8000], getStyle(67)).addTo(map);
+nord_ouest = L.circle([6.4704, 10.4397], getStyle()).addTo(map);
+sud_ouest = L.circle([5.1573, 9.3673], getStyle(12)).addTo(map);
+est = L.circle([7.3697, 12.3547], getStyle()).addTo(map);
+// yde.bindPopup(local_data["local_stat"]["yde"] + " Cases Identifier ici");
+// yde.on("mouseover", function(ev) {
+//   yde.openPopup();
+// });
+// yde.addTo(map);
 
 
-// adding circles for identified cases
-baf = L.circle([5.4816, 10.4271], styles);
-baf.bindPopup(local_data["local_stat"]["baf"] + " Cases Identifier ici");
-baf.on("mouseover", function(ev) {
-  baf.openPopup();
-});
-
-baf.addTo(map);
-// adding circles for identified cases
-dla = L.circle([4.0511, 9.7679], styles);
-dla.bindPopup(local_data["local_stat"]["dla"] + " Cases Identifier ici");
-dla.on("mouseover", function(ev) {
-  dla.openPopup();
-});
-dla.addTo(map);
 
 // opening sidebar
 $(document).ready(function() {
